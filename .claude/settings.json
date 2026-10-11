@@ -76,7 +76,10 @@
     "ask": [
       "mcp__supabase__execute_sql",
       "mcp__supabase__apply_migration",
-      "mcp__leaddesk__leaddesk_set_lead_status"
+      "mcp__leaddesk__leaddesk_set_lead_status",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_type",
+      "mcp__playwright__browser_fill_form"
     ],
     "allow": [
       "mcp__supabase__search_docs",
@@ -87,9 +90,6 @@
       "mcp__vercel__list_deployment_events",
       "mcp__playwright__browser_snapshot",
       "mcp__playwright__browser_find",
-      "mcp__playwright__browser_click",
-      "mcp__playwright__browser_type",
-      "mcp__playwright__browser_fill_form",
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_console_messages",
       "mcp__playwright__browser_network_requests",

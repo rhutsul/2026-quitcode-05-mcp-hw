@@ -28,6 +28,10 @@
 | 8 | `browser_network_requests` | `static: false` | `allow` | `[POST] http://localhost:3000/ => [200] OK`; 22 статичні запити не показано |
 | 9 | `browser_network_requests` | `static: true`, `filter: "^(?!http://localhost:3000)"` | `allow` | порожньо — жодного запиту за межі `localhost:3000` |
 
+Стовпець «Підтвердження» — стан правил на момент перевірки. Після рев'ю `browser_fill_form`, `browser_type` і
+`browser_click` прибрано з `allow` і додано в `ask` (`.claude/settings.json`): тепер кроки 4 і 5 теж
+просили б схвалення людини, бо відправлення форми — це зміна даних.
+
 Текст запиту на схвалення для кроку 2, як його показав Claude Code:
 
 ```

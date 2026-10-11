@@ -99,19 +99,15 @@
 - **Vercel:**
   - Деплой — git-інтеграція в дашборді Vercel: імпорт форку, гілка `main`, налаштування Next.js за
     замовчуванням, без змінних оточення. Ні MCP, ні CLI для деплою не використовували.
-  - Спроба 1: `list_projects` (`search: "2026-quitcode-05-mcp-hw"`) → проєкт;
-    `list_deployments` із `teamId` → **403** «Not authorized: Trying to access resource under scope … You
-    must re-authenticate to this scope»; `list_deployments` без `teamId` → деплой `READY`, production, коміт
-    `958d2ee`; `list_deployment_events` двічі (з `builds: 1` і з `slug`) → 403. Агент нічого не обходив:
-    пояснив, що токену бракує скоупу, у якому лежить проєкт, і запропонував повторний вхід. Причина — на
-    першому екрані згоди OAuth доступ до цього скоупу не надали.
-  - Повторний вхід: `/mcp` → `vercel` → re-authenticate, на екрані згоди надано доступ до скоупу особистого
-    акаунта, де лежить проєкт.
-  - Спроба 2 (нова сесія, той самий запит): `list_projects` (схвалив вручну) → `list_teams` (схвалив
-    вручну; модель викликала його сама, щоб дістати `teamId`) → `list_deployments` (`allow`) →
-    `list_deployment_events` з `teamId`, `builds: 1`, `limit: -1` (`allow`) → 76 подій білду
-    `bld_kns6c9hhm`. Лог — `docs/mcp/evidence/vercel-build-log.txt`: текст подій без змін, час UTC; вивід
-    `list_teams` і `list_projects` нікуди не збережено.
+  - Спроба 1: останній деплой (`READY`, production, коміт `958d2ee`) агент знайшов, але
+    `list_deployment_events` двічі повернув **403** «Not authorized: Trying to access resource under scope …
+    You must re-authenticate to this scope». Агент нічого не обходив: пояснив, що токену бракує доступу, і
+    запропонував повторний вхід. Причина — на першому екрані згоди OAuth потрібного доступу не надали.
+  - Повторний вхід: `/mcp` → `vercel` → re-authenticate, на екрані згоди надано доступ особистого акаунта.
+  - Спроба 2 (нова сесія, той самий запит): агент знову знайшов деплой і викликав `list_deployment_events`
+    (`builds: 1`, `limit: -1`, у `allow`) → 76 подій білду. Лог — `docs/mcp/evidence/vercel-build-log.txt`:
+    текст подій без змін, час UTC. Виклики, якими агент шукав проєкт і деплой, перед виконанням я схвалював
+    вручну; їхні результати ніде не збережено й тут не наведено.
   - Що в лозі: збірка `main @ 958d2ee` у `iad1`, `npm install` (493 пакети, очікувані `npm warn
     deprecated` і `install-scripts`), Next.js 16.3.5 (Turbopack), TypeScript без помилок, 8 статичних
     сторінок, `Build Completed in /vercel/output [34s]`, `Deployment completed`. Збігається з логом білду в
@@ -138,8 +134,8 @@
     (`POST http://localhost:3000/ → 200`) → `browser_network_requests` з фільтром «не localhost:3000» →
     порожньо. Деталі — `docs/mcp/evidence/playwright-form-check.md`.
 - **Що агент зробив сам, без прохання:**
-  - у Vercel викликав `list_teams`, щоб знайти `teamId`, — так підштовхує опис параметра; результат у
-    репозиторій не потрапив;
+  - у Vercel сам викликав інструмент переліку, щоб дістати ідентифікатор для параметра `teamId`, — так
+    підштовхує опис цього параметра; виклик я схвалив вручну, його результат ніде не збережено;
   - після логу Vercel сам зауважив, що локальний коміт ще не задеплоєно (бачив `git status` у своєму
     контексті) — нешкідливо, але показує, що агент дивиться й на стан репозиторію;
   - у перевірці форми сам додав другий запит до мережі з фільтром «усе, крім localhost:3000», щоб довести,

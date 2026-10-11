@@ -68,11 +68,15 @@
       "mcp__playwright__webmcp_*",
       "mcp__playwright__browser_file_upload",
       "mcp__playwright__browser_drop",
-      "mcp__playwright__browser_evaluate"
+      "mcp__playwright__browser_evaluate",
+
+      "WebFetch",
+      "WebSearch"
     ],
     "ask": [
       "mcp__supabase__execute_sql",
-      "mcp__supabase__apply_migration"
+      "mcp__supabase__apply_migration",
+      "mcp__leaddesk__leaddesk_set_lead_status"
     ],
     "allow": [
       "mcp__supabase__search_docs",

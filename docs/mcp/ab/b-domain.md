@@ -3,16 +3,17 @@
 Повний журнал сесії Claude Code, перетворений на Markdown без змін у тексті: запити людини, кожен виклик
 інструмента з аргументами, кожен результат, відповіді агента. Міркування моделі (thinking) не включено.
 Порівняння й висновок — `docs/mcp/ab-generic-vs-domain.md`.
+Шлях до домашньої теки користувача Windows у тексті замінено на `%USERPROFILE%` (решта — без змін).
 
 **Налаштування прогону**
 
-- Тека: `C:\Users\Dell\lds\desk-2` — порожня, поза репозиторієм; нова сесія лише для цього прогону.
+- Тека: `%USERPROFILE%\lds\desk-2` — порожня, поза репозиторієм; нова сесія лише для цього прогону.
 - Сервер (скоуп `local`): `claude mcp add leaddesk -- node "<репозиторій>/mcp/leaddesk-server/src/server.mjs"` —
   режим фікстури, свіжий процес: до прогону нічого не змінено.
 - Запуск (Windows PowerShell): `$env:DISABLE_AUTOUPDATER="1"; $env:ENABLE_CLAUDEAI_MCP_SERVERS="false"`, потім
   `claude --permission-mode default --model claude-opus-5-5 --effort medium`.
 - `/mcp` першою дією сесії (до журналу не потрапляє; за знімком екрана): «Manage MCP servers · 1 server ·
-  Local MCPs (C:\Users\Dell\.claude.json [project: C:\Users\Dell\lds\desk-2]) · ✓ leaddesk · 2 tools»
+  Local MCPs (%USERPROFILE%\.claude.json [project: %USERPROFILE%\lds\desk-2]) · ✓ leaddesk · 2 tools»
   (`leaddesk_find_leads` — read-only, `leaddesk_set_lead_status`).
 - Схвалення: кожен виклик `mcp__leaddesk__*` показав рамку «Tool use … Do you want to proceed?» і схвалений
   вручну варіантом `1. Yes`. `ToolSearch` і читання ресурсу `ReadMcpResourceTool` рамки не показали.
@@ -21,7 +22,7 @@
 ---
 
 - Сесія: `5878ecd3-62cb-4e40-b452-26146e21b640.jsonl`
-- Тека: `C:\Users\Dell\lds\desk-2`
+- Тека: `%USERPROFILE%\lds\desk-2`
 - Claude Code: 2.1.296 · модель: claude-opus-5-5 · режим дозволів: default
 - Час (UTC): 2026-10-11T11:37:29.483Z — 2026-10-11T11:41:15.348Z
 - Запитів людини: 6; викликів інструментів: 10

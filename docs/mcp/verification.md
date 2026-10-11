@@ -100,11 +100,12 @@
     замовчуванням, без змінних оточення. Ні MCP, ні CLI для деплою не використовували.
   - Спроба 1: `list_projects` (`search: "2026-quitcode-05-mcp-hw"`) → проєкт;
     `list_deployments` із `teamId` → **403** «Not authorized: Trying to access resource under scope … You
-    must re-authenticate to this scope»; `list_deployments` без команди → деплой `READY`, production, коміт
+    must re-authenticate to this scope»; `list_deployments` без `teamId` → деплой `READY`, production, коміт
     `958d2ee`; `list_deployment_events` двічі (з `builds: 1` і з `slug`) → 403. Агент нічого не обходив:
-    пояснив, що токен не має скоупу команди, і запропонував повторний вхід. Причина — на першому екрані
-    згоди OAuth не дали доступ до особистої команди акаунта.
-  - Повторний вхід: `/mcp` → `vercel` → re-authenticate, на екрані згоди обрано особисту команду.
+    пояснив, що токену бракує скоупу, у якому лежить проєкт, і запропонував повторний вхід. Причина — на
+    першому екрані згоди OAuth доступ до цього скоупу не надали.
+  - Повторний вхід: `/mcp` → `vercel` → re-authenticate, на екрані згоди надано доступ до скоупу особистого
+    акаунта, де лежить проєкт.
   - Спроба 2 (нова сесія, той самий запит): `list_projects` (схвалив вручну) → `list_teams` (схвалив
     вручну; модель викликала його сама, щоб дістати `teamId`) → `list_deployments` (`allow`) →
     `list_deployment_events` з `teamId`, `builds: 1`, `limit: -1` (`allow`) → 76 подій білду

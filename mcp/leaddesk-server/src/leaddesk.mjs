@@ -7,7 +7,7 @@ import { LEAD_ID, LEAD_STATUSES, LeadDeskError, findLeads, setLeadStatus } from 
 
 const STATUSES_URI = "leaddesk://reference/statuses";
 
-// What each status means for the Studio Nova team. One entry per LEAD_STATUSES value.
+// What each status means for the client's team. One entry per LEAD_STATUSES value.
 const STATUS_GUIDE = {
   new: {
     meaning: "Заявка надійшла (форма на сайті, реклама, рекомендація), але з клієнтом ще ніхто не говорив.",

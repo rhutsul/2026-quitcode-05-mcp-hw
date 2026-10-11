@@ -21,9 +21,10 @@
   ```
 
 - **`tools-list.json`:** рівно два інструменти. `leaddesk_find_leads` — `"readOnlyHint": true`,
-  `leaddesk_set_lead_status` — `"readOnlyHint": false` (плюс `destructiveHint: false`,
-  `idempotentHint: false`: зміну статусу можна відкотити, але повторний виклик пише новий запис
-  аудиту). Сім описів: два інструменти й п'ять параметрів (`status`, `limit`, `leadId`, `status`,
+  `leaddesk_set_lead_status` — `"readOnlyHint": false` (плюс `destructiveHint: false`: зміну статусу
+  можна відкотити; `idempotentHint: false`: виклик не ідемпотентний — повтор тих самих аргументів дає інший
+  результат, ніж перший виклик: перший змінює статус і пише запис аудиту, а повтор із тим самим статусом
+  повертає `isError: true` і запису аудиту не створює). Сім описів: два інструменти й п'ять параметрів (`status`, `limit`, `leadId`, `status`,
   `reason`) — у JSON Schema це поле `description`, і саме його модель бачить замість документації.
   Схеми підхопили обмеження Zod: `enum` статусів, `pattern: ^lead_\d{4}$`, `minimum`/`maximum` для
   `limit`, `minLength`/`maxLength` для `reason`.

@@ -3,16 +3,15 @@
 Повний журнал сесії Claude Code, перетворений на Markdown без змін у тексті: запити людини, кожен виклик
 інструмента з аргументами, кожен результат, відповіді агента. Міркування моделі (thinking) не включено.
 Порівняння й висновок — `docs/mcp/ab-generic-vs-domain.md`.
-Шлях до домашньої теки користувача Windows у тексті замінено на `%USERPROFILE%` (решта — без змін).
 
 **Налаштування прогону**
 
-- Тека: `%USERPROFILE%\lds\desk-1` — порожня, поза репозиторієм; нова сесія лише для цього прогону.
+- Тека: `C:\Users\Dell\lds\desk-1` — порожня, поза репозиторієм; нова сесія лише для цього прогону.
 - Сервер (скоуп `local`): `claude mcp add --transport http supabase "https://mcp.supabase.com/mcp?project_ref=pxygtvqheervtnbhafdw&read_only=true&features=database,docs"`
 - Запуск (Windows PowerShell): `$env:DISABLE_AUTOUPDATER="1"; $env:ENABLE_CLAUDEAI_MCP_SERVERS="false"`, потім
   `claude --permission-mode default --model claude-opus-5-5 --effort medium`.
 - `/mcp` першою дією сесії (до журналу не потрапляє; за знімком екрана): «Manage MCP servers · 1 server ·
-  Local MCPs (%USERPROFILE%\.claude.json [project: %USERPROFILE%\lds\desk-1]) · ✓ supabase · 5 tools».
+  Local MCPs (C:\Users\Dell\.claude.json [project: C:\Users\Dell\lds\desk-1]) · ✓ supabase · 5 tools».
   Інструменти (сесія входу перед прогоном): `search_docs`, `list_tables`, `list_extensions`, `list_migrations`,
   `execute_sql`.
 - Схвалення: кожен виклик `mcp__supabase__*` показав рамку «Tool use … Do you want to proceed?» і схвалений
@@ -22,7 +21,7 @@
 ---
 
 - Сесія: `c378e636-cb59-4f4c-8b71-f77de84f3c52.jsonl`
-- Тека: `%USERPROFILE%\lds\desk-1`
+- Тека: `C:\Users\Dell\lds\desk-1`
 - Claude Code: 2.1.296 · модель: claude-opus-5-5 · режим дозволів: default
 - Час (UTC): 2026-10-11T11:26:25.644Z — 2026-10-11T11:31:47.811Z
 - Запитів людини: 6; викликів інструментів: 10
@@ -163,7 +162,7 @@
 ```json
 {
   "pattern": "qualified|contacted",
-  "path": "%USERPROFILE%\\lds\\desk-1",
+  "path": "C:\\Users\\Dell\\lds\\desk-1",
   "output_mode": "content",
   "-i": true,
   "head_limit": 40

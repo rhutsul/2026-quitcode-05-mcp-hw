@@ -38,6 +38,9 @@
   `(status, created_at desc)`; RLS увімкнено без політик — таблиця закрита для ролей `anon` і `authenticated`.
 - Сид `supabase/seed/leads.sql`: 20 рядків, `lead_0001`–`lead_0020`, ті самі, що в `materials/leads.json`
   (обидва SQL-файли згенеровано скриптом прямо з `materials/leads.json`, тож розбіжність виключена).
+  У базу сид застосовано один раз, у порожню таблицю, ще без `on conflict (id) do nothing`; цей рядок
+  додано після рев'ю, щоб повторний запуск пропускав наявні записи й не зупинявся на первинному ключі. На вміст
+  20 рядків він не впливає.
 - Скільки інструментів Supabase видно в `/mcp` із вашим URL: 9 — `search_docs`, `list_tables`,
   `list_extensions`, `list_migrations`, `apply_migration`, `execute_sql`, `get_project_url`,
   `get_publishable_keys`, `generate_typescript_types`.

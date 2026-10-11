@@ -1,6 +1,6 @@
 # Перевірка (Task A, Task B, бонус E)
 
-- **Інструмент і версія, модель:** Claude Code 2.1.289 (CLI для MCP-сесій; код і документи — Claude Code
+- **Інструмент і версія, модель:** Claude Code 2.1.289 (CLI для MCP-сесій Task B; Task C — 2.1.296; код і документи — Claude Code
   у десктоп-застосунку) · Claude Opus 5.5
 - **ОС і термінал, Node:** Windows 10 Pro 22H2 (19045) · Git Bash 5.3 · Node 24.18.0
 

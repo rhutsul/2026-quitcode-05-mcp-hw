@@ -134,8 +134,9 @@
     (`http://localhost:3000`, схвалено вручну) → `browser_snapshot` → `browser_fill_form` (вигадані дані,
     `test@example.com`) → `browser_click` («Надіслати заявку») → `browser_snapshot` («Дякуємо! Заявку
     отримано.») → `browser_console_messages` (2 службові, помилок 0) → `browser_network_requests`
-    (`POST http://localhost:3000/ → 200`) → `browser_network_requests` з фільтром «не localhost:3000» →
-    порожньо. Деталі — `docs/mcp/evidence/playwright-form-check.md`.
+    (`POST http://localhost:3000/ → 200`) → `browser_network_requests` з фільтром «не починається з
+    `http://localhost:3000`» → порожньо (фільтр перевіряє префікс URL, а не межу origin; межі доказу — у
+    `docs/mcp/evidence/playwright-form-check.md`, «Мережа»).
 - **Що агент зробив сам, без прохання:**
   - у Vercel сам викликав інструмент переліку, щоб дістати ідентифікатор для параметра `teamId`, — так
     підштовхує опис цього параметра; виклик я схвалив вручну, його результат ніде не збережено;

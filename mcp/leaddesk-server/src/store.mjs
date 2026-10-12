@@ -17,8 +17,12 @@ export class LeadDeskError extends Error {}
 
 function load(rows) {
   if (!Array.isArray(rows)) throw new Error("fixture: expected an array of leads");
+  const seen = new Set();
   for (const row of rows) {
     if (!LEAD_ID.test(row?.id ?? "")) throw new Error(`fixture: bad lead id ${JSON.stringify(row?.id)}`);
+    // A Map would silently keep only the last of two rows with the same id.
+    if (seen.has(row.id)) throw new Error(`fixture: duplicate lead id ${row.id}`);
+    seen.add(row.id);
     if (!LEAD_STATUSES.includes(row.status)) throw new Error(`fixture: ${row.id} has unknown status ${row.status}`);
     if (Number.isNaN(Date.parse(row.createdAt))) throw new Error(`fixture: ${row.id} has no valid createdAt`);
   }

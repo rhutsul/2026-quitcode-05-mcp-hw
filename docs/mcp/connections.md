@@ -37,7 +37,9 @@
 - Міграція `supabase/migrations/0001_leaddesk.sql` створює таблиці: `leads` (id `lead_NNNN`, `full_name`,
   `company`, `email`, `source`, `status`, `budget`, `message`, `created_at`); `check` на статус — рівно
   `new`, `contacted`, `qualified`, `won`, `lost`; `check` на джерело — `LEAD_SOURCES`; індекс
-  `(status, created_at desc)`; RLS увімкнено без політик — таблиця закрита для ролей `anon` і `authenticated`.
+  `(status, created_at desc)`; RLS увімкнено без політик, тож через API Supabase ролі `anon` і `authenticated`
+  рядків не отримують. Привілеї цих ролей на таблицю міграція не відкликає (`revoke` немає), і окремо ми їх не
+  перевіряли: захист тримається саме на RLS без політик.
 - Сид `supabase/seed/leads.sql`: 20 рядків, `lead_0001`–`lead_0020`, ті самі, що в `materials/leads.json`
   (обидва SQL-файли згенеровано скриптом прямо з `materials/leads.json`, тож розбіжність виключена).
   У базу сид застосовано один раз, у порожню таблицю, ще без `on conflict (id) do nothing`; цей рядок

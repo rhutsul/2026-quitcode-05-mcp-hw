@@ -43,8 +43,11 @@
   ```
 
   `{ action, leadId, at }` — форма `AuditEntry` з `lib/types.ts`; `action` названо в стилі
-  застосунку (`lead.created` у `app/actions.ts`). Сервер надрукував у stderr один рядок
-  `leaddesk: lead_0002 new -> contacted` — без імені, email і причини.
+  застосунку (`lead.created` у `app/actions.ts`). Журнал сервера в stderr — один рядок на зміну, без
+  ідентифікатора ліда, імені, email і причини: після рев'ю з рядка прибрано й `leadId`, бо через фікстуру він
+  веде до людини. Повторний запуск тієї самої команди (з іншою причиною, `set-status.json` не перезаписано)
+  надрукував у stderr `leaddesk: lead status changed new -> contacted`; `leadId` лишився лише в записі
+  аудиту в `structuredContent`.
 - **`resource-read.json`:** `leaddesk://reference/statuses`, `"mimeType": "text/markdown"`, п'ять
   розділів: що означає статус, коли його ставлять і хто переводить.
 - **Доменні помилки** (не в артефактах, перевірено тими самими командами):
@@ -99,7 +102,7 @@
 - **Vercel:**
   - Деплой — git-інтеграція в дашборді Vercel: імпорт форку, гілка `main`, налаштування Next.js за
     замовчуванням, без змінних оточення. Ні MCP, ні CLI для деплою не використовували.
-  - Спроба 1: останній деплой (`READY`, production, коміт `958d2ee`) агент знайшов, але
+  - Спроба 1: потрібний деплой агент знайшов (подробиць переліку тут не наведено), але
     `list_deployment_events` двічі повернув **403** «Not authorized: Trying to access resource under scope …
     You must re-authenticate to this scope». Агент нічого не обходив: пояснив, що токену бракує доступу, і
     запропонував повторний вхід. Причина — на першому екрані згоди OAuth потрібного доступу не надали.

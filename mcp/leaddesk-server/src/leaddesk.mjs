@@ -119,8 +119,9 @@ export function createLeadDeskServer() {
     async ({ leadId, status, reason }) => {
       try {
         const { lead, previousStatus, audit } = setLeadStatus({ leadId, status, reason });
-        // One stderr line per change, without personal data: stdout belongs to the protocol.
-        console.error(`leaddesk: ${leadId} ${previousStatus} -> ${status}`);
+        // One stderr line per change: stdout belongs to the protocol. No lead id either — through the
+        // fixture it leads to a person; the audit entry in structuredContent carries it instead.
+        console.error(`leaddesk: lead status changed ${previousStatus} -> ${status}`);
         return {
           content: [
             {
